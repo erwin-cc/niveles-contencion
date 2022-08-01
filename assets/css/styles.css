@@ -1,0 +1,48 @@
+.bordeSeccion {
+    border: 2px solid;
+    border-color: rgba(0,0,0,0.2);
+    border-radius: 10px;
+}
+
+.off {
+    display: none !important;
+}
+
+.boxClean {
+    margin: 0px;
+    padding: 0px;
+}
+
+.link {
+    opacity: 0.7;
+    height: 2.5rem;
+}
+
+.link:hover {
+    opacity: 1;
+    transform: scale(1.2,1.2);
+}
+
+.footerText {
+    opacity: 0.8;
+}
+
+/*Tooltip para mensage error*/
+.container-input {
+    position: relative;
+}
+
+.errorField {
+    visibility: hidden;
+    position: absolute;
+    width: 350px;
+    top: 95%;
+    left: 50%;
+    transform: translate(-50%,0);
+    text-align: center;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 300ms, top 300ms;
+}
+
+

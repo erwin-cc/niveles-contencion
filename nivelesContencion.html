@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <title>Niveles de Contención</title>
+</head>
+
+<body>
+    <header>
+        <h2 class="bg-primary text-white pt-3 text-center fw-bold my-0">&#128679&nbsp;&nbsp; Cálculo de Niveles de
+            Contención &nbsp;&nbsp;&#128679;</h2>
+        <h4 class="bg-primary text-white pt-1 pb-2 text-center fw-bold">Manual de Carreteras 6.502.601</h4>
+    </header>
+    <main class="container">
+        <!--PASO 1 -->
+        <div id="paso1">
+            <h4 class="px-4 mt-4"><b>Paso 1:</b> Determinación de Zona de Riesgo (Según 6.502.501).</h4>
+            <div class="bordeSeccion">
+                <form id="formPaso1">
+                    <div class="row px-4 my-4">
+                        <div class="col-12 col-lg-6 my-2 container-input">
+                            <label for="paso1-tipo">Seleccione Zona de Riesgo.</label>
+                            <br>
+                            <select class="form-select my-1" id="paso1-zona">
+                                <option selected disabled>Seleccione zona de riesgo</option>
+                                <option value="alto">Riesgo Alto</option>
+                                <option value="normal">Riesgo Normal</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+                <div class="row px-4 mb-4">
+                    <h5 id="paso1-conclusion" class="fw-bold"></h5>
+                </div>
+            </div>
+        </div>
+        <!--PASO 2 -->
+        <div id="paso2" class="off">
+            <h4 class="px-4 mt-4 mb-0"><b>Paso 2:</b> Aumento del nivel de contención debido a camiones de más de dos
+                ejes.</h4>
+            <div class="bordeSeccion mt-2">
+                <form id="formPaso2">
+                    <div class="row px-4 my-4">
+                        <div class="col-12 col-lg-6 my-2 container-input">
+                            <label for="paso2-tipo">Seleccione tipo de calzada</label>
+                            <br>
+                            <select class="form-select" id="paso2-tipo"
+                                data-empty-error-msg="Debe seleccionar una opción.">
+                                <option selected disabled>Tipo de calzada</option>
+                                <option value="bidireccional">Bidireccional</option>
+                                <option value="unidireccional">Unidireccional</option>
+                            </select>
+                            <span id="error2TipoCal" class="text-danger errorField"></span>
+                        </div>
+
+                        <div class="col-12 col-lg-6 my-2 container-input">
+                            <label for="paso2-tmda">Ingrese valor de TMDA de la ruta</label>
+                            <br>
+                            <input class="form-control" id="paso2-tmda" data-empty-error-msg="Debe ingresar un valor."
+                                data-type-error-msg="El valor debe ser numérico." />
+                            <span id="error2Tmda" class="text-danger errorField"></span>
+                        </div>
+
+                        <div class="col-12 col-lg-6 my-2 container-input">
+                            <label for="paso2-tmda2Ejes">Ingrese valor de TMDA para camiones de más de 2 ejes</label>
+                            <br>
+                            <input class="form-control" id="paso2-tmda2Ejes"
+                                data-empty-error-msg="Debe ingresar un valor."
+                                data-type-error-msg="El valor debe ser numérico." />
+                            <span id="error2Tmda2Ejes" class="text-danger errorField"></span>
+                        </div>
+                        <div class="col-12 col-lg-6 my-2 text-center align-self-center">
+                            <button id="paso2-analizar" type="submit" class="btn btn-primary">Analizar</button>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="row off px-4 mb-4" id="paso2-resultados">
+                    <p><b>Tabla 6.502.602.A -</b> Valores Máximos TMDA camiones de más de 2 ejes</p>
+                    <div class="col-12 col-lg-6 mb-2 text-center align-self-center">
+                        <table id="tablaNcCam2Ejes" class="table table-bordered border-primary">
+                            <thead>
+                                <tr>
+                                    <th>TMDA</th>
+                                    <th>Camiones de + 2 ejes (veh/día)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="row">
+                        <h5 id="paso2-conclusion" class="fw-bold"></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--PASO 3 -->
+        <div id="paso3" class="off">
+            <h4 class="px-4 mt-4 mb-0"><b>Paso 3:</b> Aumento del nivel de contención debido a camiones.</h4>
+            <div class="bordeSeccion mt-2">
+                <form id="formPaso3">
+                    <div class="row px-4 my-4">
+                        <div class="col-12 col-lg-6 my-2 container-input">
+                            <label for="paso3-tmdaCam">Ingrese valor de TMDA para camiones de 2 y más ejes</label>
+                            <br>
+                            <input class="form-control" id="paso3-tmdaCam"
+                                data-empty-error-msg="Debe ingresar un valor."
+                                data-type-error-msg="El valor debe ser numérico." />
+                            <span id="error3TmdaCam" class="text-danger errorField"></span>
+                        </div>
+                        <div class="col-12 col-lg-6 text-center align-self-center">
+                            <button id="paso3-analizar" type="submit" class="btn btn-primary">Analizar</button>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="row off px-4 mb-4" id="paso3-resultados">
+                    <p><b>Tabla 6.502.602.A -</b> Valores Máximos TMDA camiones de 2 y más ejes.</p>
+                    <div class="col-12 col-lg-6 mb-2 text-center align-self-center">
+                        <table id="tablaNcCam" class="table table-bordered border-primary">
+                            <thead>
+                                <tr>
+                                    <th>TMDA</th>
+                                    <th>Camiones de 2 y más ejes (veh/día)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="row">
+                        <h5 id="paso3-conclusion" class="fw-bold"></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--PASO 4 -->
+        <div id="paso4" class="off">
+            <h4 class="px-4 mt-4 mb-0"><b>Paso 4:</b> Determinación de Zonas de Riesgo Normal</h4>
+            <div class="bordeSeccion mt-2">
+                <!--Terraplen -->
+                <h5 class="px-4 mt-4 mb-0"><b>&#128208; Terraplenes (6.502.504).</b></h5>
+                <form id="formPaso4Talud">
+                    <div class="row px-4 my-2">
+                        <div class="col-12 col-lg-6 my-2 container-input">
+                            <label>Ingrese valor 'H' del talud.</label>
+                            <br>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">V:</span>
+                                <input class="form-control" value=1 disabled>
+                                <span class="input-group-text">H:</span>
+                                <div>
+                                    <input id="paso4-Htalud" class="form-control"
+                                        data-empty-error-msg="Debe ingresar un valor."
+                                        data-type-error-msg="El valor debe ser numérico.">
+                                    <span id="error4Htalud" class="text-danger errorField"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 my-2 text-center align-self-center">
+                            <button type="submit" id="paso4-evalTalud" class="btn btn-primary">Analizar</button>
+                        </div>
+                    </div>
+                </form>
+                <div class="row px-4">
+                    <p id="paso4-descrip" class="fw-semibold "></p>
+                </div>
+                <div class="row px-4 mb-4">
+                    <p id="paso4-terraplenConclusion" class="fw-semibold fs-5"></p>
+                </div>
+                <hr>
+
+                <!--Medianas-->
+                <h5 class="px-4 mt-4 mb-0"><b>&#8596 Medianas (6.502.505).</b></h5>
+                <form id="formPaso4Mediana">
+                    <div class="row px-4 my-2">
+                        <label>Ingrese los valores solicitados</label>
+                        <div class="col-12 col-lg-4 container-input">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">TMDA: </span>
+                                <div>
+                                    <input id="paso4-medianaTmda" class="form-control"
+                                        data-empty-error-msg="Debe ingresar un valor."
+                                        data-type-error-msg="El valor debe ser numérico.">
+                                    <span id="error4medianaTmda" class="text-danger errorField"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-4 container-input">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">Vp(km/h): </span>
+                                <div>
+                                    <input id="paso4-medianaVp" class="form-control"
+                                        data-empty-error-msg="Debe ingresar un valor."
+                                        data-type-error-msg="El valor debe ser numérico."
+                                        data-vp-error-msg="Intente con un múltiplo de 10.">
+                                    <span id="error4medianaVp" class="text-danger errorField"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-4 container-input">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">Ancho Mediana (m)</span>
+                                <div>
+                                    <input id="paso4-medianaAncho" class="form-control"
+                                        data-empty-error-msg="Debe ingresar un valor."
+                                        data-type-error-msg="El valor debe ser numérico.">
+                                    <span id="error4medianaAncho" class="text-danger errorField"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row px-4 my-2">
+                        <p class="boxClean"><b>Nota:</b> el valor del ancho de mediana corresponde a la zona libre de
+                            obstaculos, comprendida entre los bordes de dos calzadas (incluye las bermas).</p>
+                        <p>En caso de haber un obstáculo, el ancho de mediana corresponde a la distancia entre el borde
+                            de
+                            la calzada y la cara del obstáculo más próxima al tránsito.</p>
+                    </div>
+                    <div class="row px-4 my-2">
+                        <div class="mt-2 mb-4 text-center align-self-center">
+                            <button type="submit" id="paso4-evalTalud" class="btn btn-primary">Analizar</button>
+                        </div>
+                    </div>
+                </form>
+                <div class="row px-4 mb-4">
+                    <p id="paso4-medianaConclusion" class="fs-5"></p>
+                </div>
+                <hr>
+
+                <!--Barandas de Puentes y Pasos Superiores 6.502.506-->
+                <h5 class="px-4 mt-4 mb-0"><b>&#127753; Barandas de puentes y pasos superiores (6.502.506).</b></h5>
+                <div class="row px-4 mb-4 mt-3">
+                    <p class="fs-5">Se debe evaluar la necesidad de usar barreras según se
+                        indica en el punto 6.502.506</p>
+                </div>
+                <hr>
+                <!--Zona Lateral 6.502.507-->
+                <h5 class="px-4 mt-4 mb-0"><b>&#8614; Zona Lateral (6.502.507).</b></h5>
+                <div class="row px-4 mb-4 mt-3">
+                    <p class="fs-5">En caso de que existan situaciones de riesgo dentro de las
+                        zonas despejadas, calculadas de acuerdo lo indicado en el punto 6.502.503, se debe determinar si
+                        corresponde o no usar algún sistema de contención, según lo dispuesto en el numeral 6.502.503
+                    </p>
+                </div>
+                <hr>
+                <!-- -->
+                <div class="row px-4 my-4 justify-content-center">
+                    <div class="fw-semibold fs-5 text-center">
+                        <p>En función del análisis hecho para los 4 puntos anteriores.</p>
+                        <p>¿Se requiere de un sistema de contención?</p>
+                    </div>
+                    <br>
+                    <div class="col-3">
+                        <select class="form-select my-1" id="paso4-criterio">
+                            <option selected disabled>Seleccione una opcion</option>
+                            <option value="si">Si</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--PASO 5 -->
+        <div id="paso5" class="off">
+            <h4 class="px-4 mt-4 mb-0"><b>Paso 5:</b> Necesidad de Barrera en Zonas de Riesgo Normal.</h4>
+            <div class="bordeSeccion mt-2">
+                <div class="row px-4 mt-4 mb-4">
+                    <p id="paso5-conclusion" class="fs-5"></p>
+                </div>
+            </div>
+        </div>
+
+        <!--PASO 6 -->
+        <div id="paso6" class="off">
+            <h4 class="px-4 mt-4 mb-0"><b>Paso 6:</b> Aumento del nivel de contención debido a buses y camiones.</h4>
+            <div class="bordeSeccion mt-2">
+                <form id="formPaso6">
+                    <div class="row px-4 my-4">
+                        <div class="col-12 col-lg-6 my-2 container-input">
+                            <label for="paso6-tipo">Seleccione tipo de calzada</label>
+                            <br>
+                            <select class="form-select" id="paso6-tipo"
+                                data-empty-error-msg="Debe seleccionar una opción.">
+                                <option selected disabled>Tipo de calzada</option>
+                                <option value="bidireccional">Bidireccional</option>
+                                <option value="unidireccional">Unidireccional</option>
+                            </select>
+                            <span id="error6TipoCal" class="text-danger errorField"></span>
+                        </div>
+
+                        <div class="col-12 col-lg-6 my-2 container-input">
+                            <label for="paso6-tmda">Ingrese valor de TMDA de la ruta</label>
+                            <br>
+                            <input class="form-control" id="paso6-tmda" data-empty-error-msg="Debe ingresar un valor."
+                                data-type-error-msg="El valor debe ser numérico." />
+                            <span id="error6Tmda" class="text-danger errorField"></span>
+                        </div>
+
+                        <div class="col-12 col-lg-6 my-2 container-input">
+                            <label for="paso6-tmdaCam">Ingrese valor de TMDA para buses y camiones de 2 y más
+                                ejes</label>
+                            <br>
+                            <input class="form-control" id="paso6-tmdaBusCam"
+                                data-empty-error-msg="Debe ingresar un valor."
+                                data-type-error-msg="El valor debe ser numérico." />
+                            <span id="error6BusCam" class="text-danger errorField"></span>
+                        </div>
+                        <div class="col-12 col-lg-6 my-2 text-center align-self-center">
+                            <button id="paso6-analizar" type="submit" class="btn btn-primary">Analizar</button>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="row off px-4 mb-4" id="paso6-resultados">
+                    <p><b>Tabla 6.502.602.C -</b> Valores Máximos TMDA buses y camiones de 2 ejes y más.</p>
+                    <div class="col-12 col-lg-6 mb-2 text-center align-self-center">
+                        <table id="tablaNcBusCam" class="table table-bordered border-primary">
+                            <thead>
+                                <tr>
+                                    <th>TMDA</th>
+                                    <th>Buses y Camiones (veh/día)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="row">
+                        <h5 id="paso6-conclusion" class="fw-bold"></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--PASO 7 -->
+        <div id="paso7" class="off">
+            <h4 class="px-4 mt-4 mb-0"><b>Paso 7:</b> Definición del nivel de contención en función del tránsito en
+                zonas de riesgo normal.</h4>
+            <div class="bordeSeccion mt-2">
+                <div class="row px-4 my-4">
+                    <h5 id="paso7-conclusion" class="fw-bold text-center">/h5>
+                </div>
+
+            </div>
+        </div>
+
+
+
+        <br><br><br><br><br><br>
+    </main>
+
+    <footer class="container fixed-bottom mb-2">
+        <h5 class="fw-semibold text-center footerText">Creado por Erwin Contreras Cabrera</h5>
+        <div id="links" class="text-center mt-2">
+            <span class="px-1"><a href="https://www.linkedin.com/in/erwincca/" target="_blank"><img class="link"
+                        src="./assets/img/linkedin.svg" alt="linkedin"></a></span>
+            <span class="px-1"><a href="https://github.com/erwin-cc" target="_blank"><img class="link"
+                        src="./assets/img/github.svg" alt="github"></a></span>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="./assets/js/nivelesContencion.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

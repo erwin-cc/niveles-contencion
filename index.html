@@ -151,13 +151,16 @@
                 <!--Terraplen -->
                 <h5 class="px-4 mt-4 mb-0"><b>&#128208; Terraplenes (6.502.504).</b></h5>
                 <form id="formPaso4Talud">
-                    <div class="row px-4 my-2">
-                        <div class="col-12 col-lg-6 my-2 container-input">
-                            <label>Ingrese valor 'H' del talud.</label>
-                            <br>
-                            <div class="input-group mb-3">
+                    <div class="row px-4 my-2 text-center justify-content-center">
+                        <label class="mb-2">Ingrese valor 'H' del talud.</label>
+                        <div class="col-8 col-sm-4 col-md-3 container-input">
+                            <div class="input-group mb-3 flex-nowrap">
                                 <span class="input-group-text">V:</span>
                                 <input class="form-control" value=1 disabled>
+                            </div>
+                        </div>
+                        <div class="col-8 col-sm-4 col-md-3 container-input">
+                            <div class="input-group mb-3 flex-nowrap">
                                 <span class="input-group-text">H:</span>
                                 <div>
                                     <input id="paso4-Htalud" class="form-control"
@@ -167,7 +170,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-lg-6 my-2 text-center align-self-center">
+                    </div>
+                    <div class="row">
+                        <div class="col-12 my-2 text-center align-self-center">
                             <button type="submit" id="paso4-evalTalud" class="btn btn-primary">Analizar</button>
                         </div>
                     </div>
@@ -186,7 +191,7 @@
                     <div class="row px-4 my-2">
                         <label>Ingrese los valores solicitados</label>
                         <div class="col-12 col-lg-4 container-input">
-                            <div class="input-group mb-3">
+                            <div class="input-group mb-3 flex-nowrap">
                                 <span class="input-group-text">TMDA: </span>
                                 <div>
                                     <input id="paso4-medianaTmda" class="form-control"
@@ -197,7 +202,7 @@
                             </div>
                         </div>
                         <div class="col-12 col-lg-4 container-input">
-                            <div class="input-group mb-3">
+                            <div class="input-group mb-3 flex-nowrap">
                                 <span class="input-group-text">Vp(km/h): </span>
                                 <div>
                                     <input id="paso4-medianaVp" class="form-control"
@@ -209,7 +214,7 @@
                             </div>
                         </div>
                         <div class="col-12 col-lg-4 container-input">
-                            <div class="input-group mb-3">
+                            <div class="input-group mb-3 flex-nowrap">
                                 <span class="input-group-text">Ancho Mediana (m)</span>
                                 <div>
                                     <input id="paso4-medianaAncho" class="form-control"
@@ -261,7 +266,7 @@
                         <p>¿Se requiere de un sistema de contención?</p>
                     </div>
                     <br>
-                    <div class="col-3">
+                    <div class="col-8 col-md-6 col-lg-4">
                         <select class="form-select my-1" id="paso4-criterio">
                             <option selected disabled>Seleccione una opcion</option>
                             <option value="si">Si</option>

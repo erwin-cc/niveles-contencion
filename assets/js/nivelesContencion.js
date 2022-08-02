@@ -73,6 +73,11 @@ const limpiarErrores = (event) => {
 
 $(function () {
 
+    const forms = $("form")
+    forms.each( function () {
+        this.reset()
+    });
+
     $("#paso1-zona").change(() => {
         $("#paso2, #paso3, #paso4, #paso5, #paso6, #paso7").addClass("off")
         let riesgo = $("#paso1-zona").val()

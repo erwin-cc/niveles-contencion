@@ -266,9 +266,9 @@ $(function () {
         $("#paso7").addClass("off")
         const analisisPaso7 = () => {
             if (tmda <= 1000) {
-                $("#paso7-conclusion").html("Se debe considerar nivel de contención LIVIANO.")
+                $("#paso7-conclusion").html('Se debe considerar nivel de contención "LIVIANO".')
             } else {
-                $("#paso7-conclusion").html("Se debe considerar nivel de contención MEDIO.")
+                $("#paso7-conclusion").html('Se debe considerar nivel de contención "MEDIO".')
             }
         }
 
@@ -286,13 +286,13 @@ $(function () {
             `)
 
             if (tipoCalzada == "bidireccional") {
-                tmdaBusCam > filtered.bid ? $("#paso6-conclusion").html('Se debe considerar Nivel de Contención "MEDIO ALTO"') : (
+                tmdaBusCam > filtered.bid ? $("#paso6-conclusion").html('Se debe considerar Nivel de Contención "MEDIO ALTO".') : (
                     $("#paso6-conclusion").html('No se produce aumento del nivel de contención debido al flujo de buses y camiones. Avance al Paso 7.'),
                     analisisPaso7(),
                     $("#paso7").removeClass("off")
                 )
             } else if (tipoCalzada == "unidireccional") {
-                tmdaCam > filtered.unid ? $("#paso6-conclusion").html('Se debe considerar Nivel de Contención "MEDIO ALTO"') : (
+                tmdaBusCam > filtered.unid ? $("#paso6-conclusion").html('Se debe considerar Nivel de Contención "MEDIO ALTO".') : (
                     $("#paso3-conclusion").html('No se produce aumento del nivel de contención debido al flujo de buses y camiones. Avance al Paso 7.'),
                     analisisPaso7(),
                     $("#paso7").removeClass("off")

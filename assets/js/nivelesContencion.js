@@ -92,6 +92,8 @@ $(function () {
 
     $("#formPaso2").submit(function (e) {
         e.preventDefault()
+        $("#fin").addClass("off")
+
         let tipoCalzada = $("#paso2-tipo").val();
         let tmdaVal = $("#paso2-tmda").val()
         let tmda2EjesVal = $("#paso2-tmda2Ejes").val()
@@ -122,7 +124,8 @@ $(function () {
                     $("#paso3").removeClass("off")
                 ) : (
                     $("#paso3").addClass("off"),
-                    $("#paso2-conclusion").html('Se debe considerar Nivel de Contención "MUY ALTO"')
+                    $("#paso2-conclusion").html('Se debe considerar Nivel de Contención "MUY ALTO"'),
+                    $("#fin").removeClass("off")
                 )
             } else if (tipoCalzada == "unidireccional") {
                 tmda2Ejes < filtered.unid ? (
@@ -130,7 +133,8 @@ $(function () {
                     $("#paso3").removeClass("off")
                 ) : (
                     $("#paso3").addClass("off"),
-                    $("#paso2-conclusion").html('Se debe considerar Nivel de Contención "MUY ALTO"')
+                    $("#paso2-conclusion").html('Se debe considerar Nivel de Contención "MUY ALTO"'),
+                    $("#fin").removeClass("off")
                 )
             }
 
@@ -172,6 +176,7 @@ $(function () {
         }
 
         checkFields(e) && tablaPaso3()
+        $("#fin").removeClass("off")
         limpiarErrores(e)
     });
 
@@ -254,10 +259,13 @@ $(function () {
         let criterio = $("#paso4-criterio").val()
         criterio === "no" ? (
             $("#paso6, #paso7").addClass("off"),
-            $("#paso5-conclusion").html("Sobre la base de los antecedentes analizados en el paso 4. <b>No se requiere del uso de un sistema de contención</b> en la zona de riesgo normal evaluada, sin embargo, se debe estudiar la necesidad de alguna medida suplementaria, como demarcación, señales alertadoras u otras.")
-        ) :
-        ( $("#paso5-conclusion").html("Sobre la base de los antecedentes analizados en el paso 4, se ha determinado que <b>se requiere del uso de un sistema de contención</b> para la zona de riesgo normal evaluada. <br> Avance al Paso 6 para determinar su nivel de contención."),
-        $("#paso6").removeClass("off") )
+            $("#paso5-conclusion").html("Sobre la base de los antecedentes analizados en el paso 4. <b>No se requiere del uso de un sistema de contención</b> en la zona de riesgo normal evaluada, sin embargo, se debe estudiar la necesidad de alguna medida suplementaria, como demarcación, señales alertadoras u otras."),
+            $("#fin").removeClass("off")
+        ) : ( 
+            $("#paso5-conclusion").html("Sobre la base de los antecedentes analizados en el paso 4, se ha determinado que <b>se requiere del uso de un sistema de contención</b> para la zona de riesgo normal evaluada. <br> Avance al Paso 6 para determinar su nivel de contención."),
+            $("#paso6").removeClass("off"),
+            $("#fin").addClass("off")
+        )
     })
 
     $("#formPaso6").submit(function (e) {
@@ -307,6 +315,7 @@ $(function () {
         }
 
         checkFields(e) && tablaPaso6()
+        $("#fin").removeClass("off")
         limpiarErrores(e)
     });
 
